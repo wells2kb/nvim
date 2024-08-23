@@ -37,4 +37,3 @@ return {
     { "<leader>tS", function() require("neotest").run.stop() end, desc = "Stop" },
   },
 }
-

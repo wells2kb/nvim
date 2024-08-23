@@ -177,43 +177,6 @@ return {
         },
       })
       require("telescope").load_extension("fzf")
-
-      local finders = require("telescope.finders")
-      local pickers = require("telescope.pickers")
-      local make_entry = require("telescope.make_entry")
-      local conf = require("telescope.config").values
-      local cmake = require("cmake-tools")
-
-      local function create_picker(title, fn)
-        return function(opts)
-          opts = opts or {}
-          opts.cwd = opts.cwd or vim.fn.getcwd()
-
-          pickers
-            .new(opts, {
-              prompt_title = title,
-              finder = finders.new_table({
-                results = fn(),
-                entry_maker = make_entry.gen_from_file(opts),
-              }),
-              sorter = conf.file_sorter(opts),
-              previewer = conf.file_previewer(opts),
-            })
-            :find()
-        end
-      end
-      require("telescope").register_extension({
-        exports = {
-          cmake_tools = create_picker("CMake - Launch Targets", function()
-            local result = cmake.get_config():launch_targets()
-            targets = {}
-            for _, v in ipairs(result.targets) do
-              table.insert(targets, v)
-            end
-            return targets
-          end),
-        },
-      })
     end,
   },
   {
