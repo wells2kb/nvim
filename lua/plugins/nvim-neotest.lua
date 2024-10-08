@@ -1,29 +1,102 @@
--- https://github.com/nvim-neotest/neotest
+-- alfaix/neotest-gtest
+local function starts_with(str, start)
+   return str:sub(1, #start) == start
+end
+
+local function ends_with(str, ending)
+   return ending == "" or str:sub(-#ending) == ending
+end
+
 return {
   "nvim-neotest/neotest",
   dependencies = {
-    "nvim-neotest/nvim-nio",
+    "alfaix/neotest-gtest",
     "nvim-lua/plenary.nvim",
-    "antoinemadec/FixCursorHold.nvim",
-    "nvim-treesitter/nvim-treesitter",
-
-    -- adapters
     "nvim-neotest/neotest-python",
+    "nvim-treesitter/nvim-treesitter",
   },
   opts = {
+    -- Can be a list of adapters like what neotest expects,
+    -- or a list of adapter names,
+    -- or a table of adapter names, mapped to adapter configs.
+    -- The adapter will then be automatically loaded with the config.
+    adapters = {
+      ["neotest-gtest"] = {
+        debug_adapter = "lldb",
+        is_test_file = function(file_path)
+          return file_path:lower():match("**test.cpp$")
+        end,
+      },
+      ["neotest-python"] = {
+        args = {
+          "-s",
+        },
+      },
+    },
     status = { virtual_text = true },
     output = { enabled = true, open_on_run = false, },
     output_panel = { enabled = true, },
     quickfix = { enabled = true, open = false, },
   },
-  config = function()
-    require("neotest").setup({
-      adapters = {
-        require("neotest-python")({
-          runner = "pytest",
-        }),
-      }
+  config = function(_, opts)
+    local neotest_ns = vim.api.nvim_create_namespace("neotest")
+    vim.diagnostic.config({
+      virtual_text = {
+        format = function(diagnostic)
+          -- Replace newline and tab characters with space for more compact diagnostics
+          local message = diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
+          return message
+        end,
+      },
+    }, neotest_ns)
+
+    -- Keep NeoTest out of BufferLine
+    vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+      pattern = { "Neotest *", },
+      callback = function()
+        vim.cmd("setl nobuflisted")
+      end,
     })
+    -- Same with the unnamed test result buffer
+    vim.api.nvim_create_autocmd({ "BufEnter", }, {
+        pattern = { "*", },
+        callback = function(args)
+          if args.file == "" then
+            vim.api.nvim_buf_set_option(args.buf, "buflisted", false)
+          end
+        end,
+      }
+    )
+
+
+    if opts.adapters then
+      local adapters = {}
+      for name, config in pairs(opts.adapters or {}) do
+        if type(name) == "number" then
+          if type(config) == "string" then
+            config = require(config)
+          end
+          adapters[#adapters + 1] = config
+        elseif config ~= false then
+          local adapter = require(name)
+          if type(config) == "table" and not vim.tbl_isempty(config) then
+            local meta = getmetatable(adapter)
+            if adapter.setup then
+              adapter.setup(config)
+            elseif meta and meta.__call then
+              adapter(config)
+            else
+              error("Adapter " .. name .. " does not support setup")
+            end
+          end
+          adapters[#adapters + 1] = adapter
+        end
+      end
+      opts.adapters = adapters
+    end
+
+    require("neotest").setup(opts)
+
   end,
   keys = {
     { "<leader>tt", function() require("neotest").run.run() end, desc = "Run Nearest" },
