@@ -51,3 +51,6 @@ vim.keymap.set("n", "<S-Left>",  "<C-w><S-h>")
 vim.keymap.set("n", "<S-Down>",  "<C-w><S-j>")
 vim.keymap.set("n", "<S-Up>",    "<C-w><S-k>")
 vim.keymap.set("n", "<S-Right>", "<C-w><S-l>")
+
+-- Go to File At Line Number Under Cursor in Vertical Split
+vim.keymap.set("n", "<C-W>gf",  "<C-w>v<C-w>wgF")
