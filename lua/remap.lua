@@ -3,7 +3,6 @@ vim.g.mapleader = " "
 -- Misc.
 vim.keymap.set("n", "<C-c>", "<ESC>")        -- Ctrl+C == Esc
 vim.keymap.set("x", "<leader>p", "\"_dP")    -- Paste & Maintain Register
-vim.keymap.set("", "q:", "<NOP>")            -- Useless
 vim.keymap.set("t", "<ESC>", [[<C-\><C-n>]]) -- Seriously, quit terminal mode
 vim.keymap.set("n", "<leader>X",             -- chmod +x
   "<CMD>!chmod +x %<CR>", { silent = true }
@@ -33,13 +32,6 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
--- Tab Through Tabs
-vim.keymap.set({ "n", "i" }, "<C-TAB>",   ":tabnext<CR>")
-vim.keymap.set({ "n", "i" }, "<C-S-TAB>", ":tabprevious<CR>")
-vim.keymap.set("n", "<leader><TAB>", ":tabnew<CR>")
-vim.keymap.set("n", "<leader><C-S-TAB>", ":tabm -1<CR>")
-vim.keymap.set("n", "<leader><C-TAB>", ":tabm +1<CR>")
-
 -- Resize Splits with Arrows
 vim.keymap.set("n", "<C-Left>",  ":vertical resize -2<CR>")
 vim.keymap.set("n", "<C-Down>",  ":resize -2<CR>")
@@ -54,3 +46,11 @@ vim.keymap.set("n", "<S-Right>", "<C-w><S-l>")
 
 -- Go to File At Line Number Under Cursor in Vertical Split
 vim.keymap.set("n", "<C-W>gf",  "<C-w>v<C-w>wgF")
+
+-- Surround Visual Selection
+vim.keymap.set("v", "s\"",  "c\"<C-r>\"\"<C-c>")
+vim.keymap.set("v", "s\'",  "c\'<C-r>\"\'<C-c>")
+vim.keymap.set("v", "s(",  "c(<C-r>\")<C-c>")
+vim.keymap.set("v", "s{",  "c{<C-r>\"}<C-c>")
+vim.keymap.set("v", "s[",  "c[<C-r>\"]<C-c>")
+vim.keymap.set("v", "s<",  "c<<C-r>\"><C-c>")
