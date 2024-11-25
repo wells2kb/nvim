@@ -148,8 +148,7 @@ return {
       lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
       lspconfig.neocmake.setup({capabilities = capabilities})
       lspconfig.omnisharp.setup({capabilities = capabilities})
-      lspconfig.pyright.setup({capabilities = capabilities})
-      lspconfig.ruff_lsp.setup({capabilities = capabilities})
+      lspconfig.ruff.setup({capabilities = capabilities})
       lspconfig.rust_analyzer.setup({capabilities = capabilities})
       lspconfig.yamlls.setup({capabilities = capabilities})
 

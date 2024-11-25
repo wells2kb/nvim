@@ -2,7 +2,6 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.2",
     keys = {
       {
         "<leader>fa",
@@ -156,12 +155,11 @@ return {
       "nvim-lua/plenary.nvim",
       {
         "nvim-telescope/telescope-fzf-native.nvim",
-        build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+        build = "make",
       },
     },
     config = function()
       require("telescope").setup({
-        defaults = {
           vimgrep_arguments = {
             "rg",
             "--color=never",
@@ -174,22 +172,8 @@ return {
           file_ignore_patterns = {
             ".git/",
           },
-        },
       })
       require("telescope").load_extension("fzf")
     end,
   },
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    init = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 300
-    end,
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    }
-  }
 }
