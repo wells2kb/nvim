@@ -32,25 +32,41 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
+-- Jump Splits with Arrows
+vim.keymap.set("n", "<S-Left>",  "<C-w><Left>")
+vim.keymap.set("n", "<S-Down>",  "<C-w><Down>")
+vim.keymap.set("n", "<S-Up>",    "<C-w><Up>")
+vim.keymap.set("n", "<S-Right>", "<C-w><Right>")
+
 -- Resize Splits with Arrows
 vim.keymap.set("n", "<C-Left>",  ":vertical resize -2<CR>")
 vim.keymap.set("n", "<C-Down>",  ":resize -2<CR>")
 vim.keymap.set("n", "<C-Up>",    ":resize +2<CR>")
 vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>")
 
--- Move Splits with Shift+Arrows
-vim.keymap.set("n", "<S-Left>",  "<C-w><S-h>")
-vim.keymap.set("n", "<S-Down>",  "<C-w><S-j>")
-vim.keymap.set("n", "<S-Up>",    "<C-w><S-k>")
-vim.keymap.set("n", "<S-Right>", "<C-w><S-l>")
+-- Move Splits with Arrows
+vim.keymap.set("n", "<A-Left>",  "<C-w><S-h>")
+vim.keymap.set("n", "<A-Down>",  "<C-w><S-j>")
+vim.keymap.set("n", "<A-Up>",    "<C-w><S-k>")
+vim.keymap.set("n", "<A-Right>", "<C-w><S-l>")
+
+-- Go to File At Line Number
+vim.keymap.set("n", "gf",  "gF")
 
 -- Go to File At Line Number Under Cursor in Vertical Split
-vim.keymap.set("n", "<C-W>gf",  "<C-w>v<C-w>wgF")
+vim.keymap.set("n", "gF",  "<C-w>v<C-w>wgF")
 
 -- Surround Visual Selection
+vim.keymap.set("v", "s ",  "c <C-r>\" <C-c>")
+vim.keymap.set("v", "s(",  "c(<C-r>\")<C-c>")
+vim.keymap.set("v", "s-",  "c-<C-r>\"-<C-c>")
+vim.keymap.set("v", "s<",  "c<<C-r>\"><C-c>")
+vim.keymap.set("v", "s[",  "c[<C-r>\"]<C-c>")
 vim.keymap.set("v", "s\"",  "c\"<C-r>\"\"<C-c>")
 vim.keymap.set("v", "s\'",  "c\'<C-r>\"\'<C-c>")
-vim.keymap.set("v", "s(",  "c(<C-r>\")<C-c>")
+vim.keymap.set("v", "s_",  "c_<C-r>\"_<C-c>")
+vim.keymap.set("v", "s`",  "c`<C-r>\"`<C-c>")
 vim.keymap.set("v", "s{",  "c{<C-r>\"}<C-c>")
-vim.keymap.set("v", "s[",  "c[<C-r>\"]<C-c>")
-vim.keymap.set("v", "s<",  "c<<C-r>\"><C-c>")
+
+-- Don't Grab the Newline in Visual
+vim.keymap.set("v", "<End>",  "<End><Left>")
