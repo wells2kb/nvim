@@ -150,6 +150,20 @@ return {
         end,
         desc="Find Global Warnings/Diagnostics",
       },
+      {
+        "<leader>gs",
+        function()
+          require("telescope.builtin").git_status()
+        end,
+        desc="Git Status",
+      },
+      {
+        "<leader>gl",
+        function()
+          require("telescope.builtin").git_commits()
+        end,
+        desc="Git Log",
+      },
     },
     dependencies = {
       "nvim-lua/plenary.nvim",
