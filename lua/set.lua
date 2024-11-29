@@ -1,5 +1,7 @@
 vim.opt.guicursor = "a:block"
 
+vim.opt.iskeyword:remove("_")
+
 vim.g.modelines = 2
 vim.opt.compatible = false
 vim.opt.cursorline = true
