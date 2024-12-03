@@ -16,10 +16,6 @@ vim.keymap.set("v", "<leader>lf",            -- Insert newline
 vim.keymap.set("n", "<leader>n", "<CMD>nohl<CR>")   -- No Highlight Search
 vim.keymap.set("n", "<leader>q", "<CMD>bp|bd#<CR>") -- Delete Buffer, Keep Split
 
--- Move highlighted text up/down w/ shift JK
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-
 -- Cursor to Middle for PgUp/PgDown
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
