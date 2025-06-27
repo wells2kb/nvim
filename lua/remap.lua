@@ -55,10 +55,10 @@ vim.keymap.set("n", "<C-Up>",    ":resize +2<CR>")
 vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>")
 
 -- Move splits with arrows
-vim.keymap.set("n", "<A-Left>",  "<C-w><S-h>")
-vim.keymap.set("n", "<A-Down>",  "<C-w><S-j>")
-vim.keymap.set("n", "<A-Up>",    "<C-w><S-k>")
-vim.keymap.set("n", "<A-Right>", "<C-w><S-l>")
+vim.keymap.set("n", "<C-S-Left>",  "<C-w><S-h>")
+vim.keymap.set("n", "<C-S-Down>",  "<C-w><S-j>")
+vim.keymap.set("n", "<C-S-Up>",    "<C-w><S-k>")
+vim.keymap.set("n", "<C-S-Right>", "<C-w><S-l>")
 
 -- Go to file at line number
 vim.keymap.set("n", "gf",  "gF")
@@ -79,7 +79,7 @@ vim.keymap.set("v", "s`",  "c`<C-r>\"`<C-c>")
 vim.keymap.set("v", "s{",  "c{<C-r>\"}<C-c>")
 
 -- Don't grab the newline in visual
-vim.keymap.set("v", "<End>",  "<End><Left>")
+vim.keymap.set("v", "$",  "<End><Left>")
 
 -- Jump to paragraph start backwards
 local jump_to_paragraph_start_backwards = function()
