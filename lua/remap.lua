@@ -94,9 +94,7 @@ local jump_to_paragraph_start_backwards = function()
   end
 
   paragraph_start = vim.fn.line("'{")
-  if paragraph_start == 1 and (
-    vim.fn.getline("1") ~= "" or vim.fn.getline("1,2") == ""
-  ) then
+  if paragraph_start == 1 and vim.fn.getline("'{") ~= "" then
     vim.fn.cursor(1, 1)
   else
     vim.fn.cursor(paragraph_start + 1, 1)
@@ -108,9 +106,7 @@ vim.keymap.set({"n", "v"}, "(", jump_to_paragraph_start_backwards)
 
 -- Jump to paragraph start forwards
 local jump_to_paragraph_start_forwards = function()
-  if vim.fn.line("'{") == 1 then
-    vim.fn.cursor(vim.fn.line("')"), 1)
-  elseif vim.fn.line("'}") ~= vim.fn.line("$") then
+  if vim.fn.line("'}") ~= vim.fn.line("$") then
     vim.fn.cursor(vim.fn.line("'{"), 1)
     vim.fn.cursor(vim.fn.line("'}"), 1)
     vim.fn.cursor(vim.fn.line("')"), 1)
