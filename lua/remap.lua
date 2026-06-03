@@ -77,9 +77,19 @@ vim.keymap.set("v", "s\'",  "c\'<C-r>\"\'<C-c>")
 vim.keymap.set("v", "s_",  "c_<C-r>\"_<C-c>")
 vim.keymap.set("v", "s`",  "c`<C-r>\"`<C-c>")
 vim.keymap.set("v", "s{",  "c{<C-r>\"}<C-c>")
+vim.keymap.set("v", "s(",  "c(<C-r>\")<C-c>")
+vim.keymap.set("v", "s>",  "c< <C-r>\" ><C-c>")
+vim.keymap.set("v", "s]",  "c[ <C-r>\" ]<C-c>")
+vim.keymap.set("v", "s}",  "c{ <C-r>\" }<C-c>")
 
 -- Don't grab the newline in visual
 vim.keymap.set("v", "$",  "<End><Left>")
+
+-- Visual select pasted stuff
+vim.keymap.set({'n', 'v'}, "gp", "<Esc>`[v`]")
+
+-- Lsp warnings
+vim.keymap.set({'n', 'v'}, "gw", ":lua vim.diagnostic.goto_next()<CR>")
 
 -- Jump to paragraph start backwards
 local jump_to_paragraph_start_backwards = function()
