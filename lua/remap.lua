@@ -43,10 +43,10 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
 -- Jump splits with arrows
-vim.keymap.set("n", "<S-Left>",  "<C-w><Left>")
-vim.keymap.set("n", "<S-Down>",  "<C-w><Down>")
-vim.keymap.set("n", "<S-Up>",    "<C-w><Up>")
-vim.keymap.set("n", "<S-Right>", "<C-w><Right>")
+vim.keymap.set("n", "<C-h>",  "<C-w><Left>")
+vim.keymap.set("n", "<C-j>",  "<C-w><Down>")
+vim.keymap.set("n", "<C-k>",    "<C-w><Up>")
+vim.keymap.set("n", "<C-l>", "<C-w><Right>")
 
 -- Resize splits with arrows
 vim.keymap.set("n", "<C-Left>",  ":vertical resize -2<CR>")
@@ -84,6 +84,9 @@ vim.keymap.set("v", "s}",  "c{ <C-r>\" }<C-c>")
 
 -- Don't grab the newline in visual
 vim.keymap.set("v", "$",  "<End><Left>")
+
+-- Tilde don't move all crazy
+vim.keymap.set({'n'}, "~", "~<Left>")
 
 -- Visual select pasted stuff
 vim.keymap.set({'n', 'v'}, "gp", "<Esc>`[v`]")
